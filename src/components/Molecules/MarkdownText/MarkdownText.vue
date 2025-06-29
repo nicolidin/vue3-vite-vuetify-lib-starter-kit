@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import { ref, computed, withDefaults } from "vue";
 import MarkdownIt from "markdown-it";
-import { MarkdownTextSize } from "@/types/sizes.ts";
+import type { MarkdownTextSize } from "../../../types/sizes.ts";
 
 // Define the props type
 type Props = {
@@ -31,7 +31,7 @@ const renderedMarkdown = computed(() => md.render(markdownContent.value));
 </script>
 
 <style lang="scss">
-@use "@/styles/app-kit/markdown-text" as *;
+@use "../../../styles/app-kit/markdown-text" as *;
 
 /* Application des styles aux différentes tailles */
 .markdown {

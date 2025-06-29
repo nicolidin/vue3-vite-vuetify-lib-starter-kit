@@ -3,7 +3,7 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useTheme as useVuetifyTheme } from "vuetify";
 import {
-  ColorMode,
+  type ColorMode,
   useGlobalAppDataStore,
 } from "../store/globalAppDataStore.ts";
 

@@ -4,7 +4,7 @@ import { DEFAULT_VUETIFY_CONFIG } from "./lidinAppKitConfig/vuetifyConfig/defaul
 import { createLidinAppKit } from "./lidinAppKitConfig/createLidinAppKit.ts";
 import { useLanguage } from "./modules/globalAppData/composables/useLanguage.ts";
 import { useTheme } from "./modules/globalAppData/composables/useTheme.ts";
-import { generateRandomUuid } from "@/services/utils/randomId.ts";
+import { generateRandomUuid } from "./services/utils/randomId.ts";
 
 export {
   useLanguage,

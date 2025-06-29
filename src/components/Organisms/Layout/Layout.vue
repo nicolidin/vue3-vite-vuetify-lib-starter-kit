@@ -30,7 +30,8 @@
 </template>
 
 <script setup lang="ts">
-import { useTheme } from "@/modules/globalAppData/composables/useTheme.ts";
+
+import {useTheme} from "../../../modules/globalAppData/composables/useTheme.ts";
 
 const { colorRef } = useTheme();
 </script>

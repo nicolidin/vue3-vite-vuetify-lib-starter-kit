@@ -22,16 +22,16 @@
     "dist",
     "src/styles/"
   ],
-  "main": "./dist/lidin-app-kit.umd.cjs",
-  "module": "./dist/lidin-app-kit.js",
+  "main": "./dist/vue3-vite-vuetify-lib-starter-kit.umd.cjs",
+  "module": "./dist/vue3-vite-vuetify-lib-starter-kit.js",
   "style": "./dist/main.scss",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/lidin-app-kit.js",
-      "require": "./dist/lidin-app-kit.umd.cjs"
+      "import": "./dist/vue3-vite-vuetify-lib-starter-kit.js",
+      "require": "./dist/vue3-vite-vuetify-lib-starter-kit.umd.cjs"
     },
-    "./styles/lidin-app-kit.scss": "./src/styles/lidin-app-kit.scss",
+    "./styles/vue3-vite-vuetify-lib-starter-kit.scss": "./src/styles/vue3-vite-vuetify-lib-starter-kit.scss",
     "./style.css": {
       "import": "./dist/style.css",
       "require": "./dist/style.css"

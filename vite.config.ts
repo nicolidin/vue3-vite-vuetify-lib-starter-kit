@@ -33,7 +33,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
+      // "@": path.resolve(__dirname, "src"), we don't do that because lib can be use in hot project with hot reload (alias)
     },
   },
   css: {

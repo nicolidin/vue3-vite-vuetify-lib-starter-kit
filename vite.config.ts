@@ -9,7 +9,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
       name: "LidinAppKit",
-      fileName: "lidin-app-kit",
+      fileName: "vue3-vite-vuetify-lib-starter-kit",
     },
     rollupOptions: {
       external: [
@@ -40,7 +40,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-        @use "src/styles/lidin-app-kit.scss" as *;
+        @use "src/styles/vue3-vite-vuetify-lib-starter-kit.scss" as *;
         `,
       },
     },

@@ -1,5 +1,5 @@
 {
-  "name": "lidin-app-kit",
+  "name": "vue3-vite-vuetify-lib-starter-kit",
   "version": "1.0.0-beta.0",
   "type": "module",
   "packageManager": "yarn@4.5.0",
@@ -31,10 +31,8 @@
       "import": "./dist/lidin-app-kit.js",
       "require": "./dist/lidin-app-kit.umd.cjs"
     },
-    "./src/styles/lidin-app-kit.scss": "./src/styles/lidin-app-kit.scss",
-    "./src/styles/spacing.scss": "./src/styles/spacing.scss",
-    "./src/styles/breakpoint.scss": "./src/styles/breakpoint.scss",
-    "./dist/style.css": {
+    "./styles/lidin-app-kit.scss": "./src/styles/lidin-app-kit.scss",
+    "./style.css": {
       "import": "./dist/style.css",
       "require": "./dist/style.css"
     }

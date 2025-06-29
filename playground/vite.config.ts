@@ -14,7 +14,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-        @use "../src/styles/lidin-app-kit.scss" as *;
+        @use "../src/styles/vue3-vite-vuetify-lib-starter-kit.scss" as *;
         `,
       },
     },

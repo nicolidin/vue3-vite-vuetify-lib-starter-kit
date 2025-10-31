@@ -3,6 +3,7 @@
     v-html="renderedMarkdown"
     :class="['markdown', `markdown--${size}`]"
   ></div>
+  yaydhqldq
 </template>
 
 <script setup lang="ts">

@@ -8,8 +8,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
-      name: "LidinAppKit",
-      fileName: "vue3-vite-vuetify-lib-starter-kit",
+      name: "VueLibExoCorrected",
+      fileName: "vue-lib-exo-corrected",
     },
     rollupOptions: {
       external: [
@@ -40,7 +40,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-        @use "src/styles/vue3-vite-vuetify-lib-starter-kit.scss" as *;
+        @use "src/styles/vue-lib-exo-corrected.scss" as *;
         `,
       },
     },

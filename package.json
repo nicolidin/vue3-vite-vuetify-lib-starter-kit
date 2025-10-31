@@ -1,6 +1,6 @@
 {
-  "name": "vue3-vite-vuetify-lib-starter-kit",
-  "version": "1.0.0-beta.3",
+  "name": "vue-lib-exo-corrected",
+  "version": "1.0.0",
   "type": "module",
   "packageManager": "yarn@4.5.0",
   "description": "A lightweight UI kit for Vue 3",
@@ -22,16 +22,16 @@
     "dist",
     "src/styles/"
   ],
-  "main": "./dist/vue3-vite-vuetify-lib-starter-kit.umd.cjs",
-  "module": "./dist/vue3-vite-vuetify-lib-starter-kit.js",
+  "main": "./dist/vue-lib-exo-corrected.umd.cjs",
+  "module": "./dist/vue-lib-exo-corrected.js",
   "style": "./dist/main.scss",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/vue3-vite-vuetify-lib-starter-kit.js",
-      "require": "./dist/vue3-vite-vuetify-lib-starter-kit.umd.cjs"
+      "import": "./dist/vue-lib-exo-corrected.js",
+      "require": "./dist/vue-lib-exo-corrected.umd.cjs"
     },
-    "./styles/vue3-vite-vuetify-lib-starter-kit.scss": "./src/styles/vue3-vite-vuetify-lib-starter-kit.scss",
+    "./styles/vue-lib-exo-corrected.scss": "./src/styles/vue-lib-exo-corrected.scss",
     "./style.css": {
       "import": "./dist/style.css",
       "require": "./dist/style.css"

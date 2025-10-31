@@ -14,7 +14,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-        @use "../src/styles/vue3-vite-vuetify-lib-starter-kit.scss" as *;
+        @use "../src/styles/vue-lib-exo-corrected.scss" as *;
         `,
       },
     },

@@ -15,19 +15,27 @@ export default {
   },
 };
 
-const Template = (args) => ({
+const Template = (args: any) => ({
   components: { SidebarTags },
   setup() {
-    const tags = ref(args.tags);
+    const tags = ref(args.tags || []);
     const onTagClick = (clickedTag: { libelleName: string; isSelected: boolean }) => {
       // Toggle selection state
-      const tag = tags.value.find(t => t.libelleName === clickedTag.libelleName);
+      const tag = tags.value.find((t: { libelleName: string; isSelected: boolean }) => t.libelleName === clickedTag.libelleName);
       if (tag) {
         tag.isSelected = !tag.isSelected;
       }
       console.log("Tag clicked:", clickedTag);
     };
-    return { args, tags, onTagClick };
+    const onTagCreate = (newTag: { title: string; color: string }) => {
+      // Ajouter le nouveau tag à la liste
+      tags.value.push({
+        libelleName: newTag.title,
+        isSelected: false,
+      });
+      console.log("Tag created:", newTag);
+    };
+    return { args, tags, onTagClick, onTagCreate };
   },
   template: `
     <v-app>
@@ -37,8 +45,8 @@ const Template = (args) => ({
             :tags="tags" 
             :title="args.title"
             :permanent="args.permanent !== false"
-            :width="args.width || 256"
-            @tag-click="onTagClick" 
+            @tag-click="onTagClick"
+            @tag-create="onTagCreate"
           />
           <div style="flex: 1; padding: 2rem; background: #fafafa;">
             <h3>Main Content Area</h3>
@@ -55,11 +63,10 @@ const Template = (args) => ({
   `,
 });
 
-export const Default = Template.bind({});
+export const Default: any = Template.bind({});
 Default.args = {
   title: "Labels",
   permanent: true,
-  width: 256,
   tags: [
     { libelleName: "Important", isSelected: false },
     { libelleName: "Work", isSelected: false },
@@ -70,19 +77,17 @@ Default.args = {
   ],
 };
 
-export const Empty = Template.bind({});
+export const Empty: any = Template.bind({});
 Empty.args = {
   title: "Labels",
   permanent: true,
-  width: 256,
   tags: [],
 };
 
-export const ManyTags = Template.bind({});
+export const ManyTags: any = Template.bind({});
 ManyTags.args = {
   title: "My Labels",
   permanent: true,
-  width: 256,
   tags: [
     { libelleName: "Important", isSelected: false },
     { libelleName: "Work", isSelected: false },

@@ -9,6 +9,7 @@
       :permanent="sidebarPermanent"
       :temporary="sidebarTemporary"
       @tag-click="handleTagClick"
+      @tag-create="handleTagCreate"
       @update:model-value="handleSidebarUpdate"
     />
     <v-main
@@ -62,6 +63,7 @@ const props = withDefaults(
 
 const emit = defineEmits<{
   (e: "tag-click", tag: { libelleName: string; isSelected: boolean }): void;
+  (e: "tag-create", tag: { title: string; color: string }): void;
   (e: "sidebar-update", value: boolean): void;
 }>();
 
@@ -74,6 +76,10 @@ watch(() => props.sidebarModelValue, (newValue) => {
 
 function handleTagClick(tag: { libelleName: string; isSelected: boolean }) {
   emit("tag-click", tag);
+}
+
+function handleTagCreate(tag: { title: string; color: string }) {
+  emit("tag-create", tag);
 }
 
 function handleSidebarUpdate(value: boolean) {

@@ -1,3 +1,4 @@
+import Dropdown from "./components/Atoms/Dropdown/Dropdown.vue";
 import MarkdownText from "./components/Molecules/MarkdownText/MarkdownText.vue";
 import Layout from "./components/Organisms/Layout/Layout.vue";
 import ListLayout from "./components/Molecules/ListLayout/ListLayout.vue";
@@ -6,6 +7,7 @@ import ListUsers from "./components/Molecules/ListUsers/ListUsers.vue";
 import NoteCard from "./components/Molecules/NoteCard/NoteCard.vue";
 import NoteCreation from "./components/Molecules/NoteCreation/NoteCreation.vue";
 import SidebarTags from "./components/Molecules/SidebarTags/SidebarTags.vue";
+import TagDropdown from "./components/Molecules/TagDropdown/TagDropdown.vue";
 import UserCard from "./components/Molecules/UserCard/UserCard.vue";
 import { DEFAULT_VUETIFY_CONFIG } from "./lidinAppKitConfig/vuetifyConfig/defaultVuetifyConfig";
 import { createLidinAppKit } from "./lidinAppKitConfig/createLidinAppKit.ts";
@@ -19,6 +21,7 @@ export {
   useTheme,
   createLidinAppKit,
   DEFAULT_VUETIFY_CONFIG,
+  Dropdown,
   MarkdownText,
   Layout,
   ListLayout,
@@ -27,6 +30,7 @@ export {
   NoteCard,
   NoteCreation,
   SidebarTags,
+  TagDropdown,
   UserCard,
   generateRandomUuid,
   extractTitleFromMarkdown,

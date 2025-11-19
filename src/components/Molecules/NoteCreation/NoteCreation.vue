@@ -11,6 +11,11 @@
       placeholder="Content..."
       class="note-creation__content"
     />
+    <TagDropdown
+      v-model="selectedTagIds"
+      :tags="tags"
+      class="note-creation__tags"
+    />
     <div class="note-creation__actions">
       <button
         @click="emitNote"
@@ -32,18 +37,33 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import TagDropdown from "../TagDropdown/TagDropdown.vue";
+
+// Type pour les tags
+type TagType = {
+  id: string;
+  title: string;
+  color: string;
+};
+
+const props = defineProps<{
+  // Liste des tags disponibles pour sélection
+  tags?: TagType[];
+}>();
 
 const emit = defineEmits<{
-  (e: "create", val: { title: string; contentMd: string }): void;
+  (e: "create", val: { title: string; contentMd: string; tagIds: string[] }): void;
 }>();
 
 const title = ref("");
 const contentMd = ref("");
+const selectedTagIds = ref<string[]>([]);
 
 function emitNote() {
   emit("create", {
     title: title.value,
     contentMd: contentMd.value,
+    tagIds: selectedTagIds.value,
   });
   resetForm();
 }
@@ -51,6 +71,7 @@ function emitNote() {
 function resetForm() {
   title.value = "";
   contentMd.value = "";
+  selectedTagIds.value = [];
 }
 </script>
 
@@ -82,6 +103,10 @@ function resetForm() {
     outline: none;
     padding: $spacing-4 0;
     @include typo-body;
+  }
+
+  &__tags {
+    margin-bottom: $spacing-12;
   }
 
   &__actions {

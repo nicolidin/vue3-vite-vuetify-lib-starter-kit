@@ -2,13 +2,12 @@
   <v-app>
     <Header />
     <SidebarTags
-      v-if="tags"
-      :tags="tags"
+      v-if="showTagsSidebar"
+      :tags="tags || []"
       :title="sidebarTitle"
       :model-value="sidebarModelValue"
       :permanent="sidebarPermanent"
       :temporary="sidebarTemporary"
-      :width="sidebarWidth"
       @tag-click="handleTagClick"
       @update:model-value="handleSidebarUpdate"
     />
@@ -36,22 +35,28 @@ import SidebarTags from "../../Molecules/SidebarTags/SidebarTags.vue";
 
 const props = withDefaults(
   defineProps<{
+    // Affiche la sidebar des tags si true
+    showTagsSidebar?: boolean;
+    // Liste optionnelle des tags à afficher (si vide, affiche uniquement "All Notes")
     tags?: {
       libelleName: string;
       isSelected: boolean;
     }[];
+    // Titre de la sidebar
     sidebarTitle?: string;
+    // État d'ouverture/fermeture de la sidebar (pour mode temporary)
     sidebarModelValue?: boolean;
+    // Si true, la sidebar est toujours visible et ne peut pas être fermée
     sidebarPermanent?: boolean;
+    // Si true, la sidebar est temporaire et peut être ouverte/fermée
     sidebarTemporary?: boolean;
-    sidebarWidth?: number | string;
   }>(),
   {
+    showTagsSidebar: false,
     sidebarTitle: "Labels",
     sidebarModelValue: true,
     sidebarPermanent: true,
     sidebarTemporary: false,
-    sidebarWidth: 256,
   }
 );
 

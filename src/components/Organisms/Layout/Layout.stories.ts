@@ -41,7 +41,7 @@ const Template = (args: any) => ({
           <div v-if="tags && tags.length > 0" style="margin-top: 2rem;">
             <h3>Tags sélectionnés:</h3>
             <ul style="list-style: none; padding: 0;">
-              <li v-for="tag in tags.filter((t: any) => t.isSelected)" :key="tag.libelleName" style="margin: 0.5rem 0;">
+              <li v-for="tag in tags.filter(t => t.isSelected)" :key="tag.libelleName" style="margin: 0.5rem 0;">
                 {{ tag.libelleName }}
               </li>
             </ul>
@@ -54,6 +54,7 @@ const Template = (args: any) => ({
 
 export const Default: any = Template.bind({});
 Default.args = {
+  showTagsSidebar: true,
   tags: [
     { libelleName: "Important", isSelected: false },
     { libelleName: "Work", isSelected: false },
@@ -64,11 +65,18 @@ Default.args = {
 
 export const WithoutSidebar: any = Template.bind({});
 WithoutSidebar.args = {
-  tags: undefined,
+  showTagsSidebar: false,
+};
+
+export const WithEmptyTags: any = Template.bind({});
+WithEmptyTags.args = {
+  showTagsSidebar: true,
+  tags: [],
 };
 
 export const WithManyTags: any = Template.bind({});
 WithManyTags.args = {
+  showTagsSidebar: true,
   tags: [
     { libelleName: "Important", isSelected: false },
     { libelleName: "Work", isSelected: false },

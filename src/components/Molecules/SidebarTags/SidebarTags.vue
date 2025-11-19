@@ -3,7 +3,6 @@
     :model-value="modelValue"
     :permanent="permanent"
     :temporary="temporary"
-    :width="width"
     class="sidebar-tags"
   >
     <template v-if="title">
@@ -55,15 +54,19 @@ import { computed } from "vue";
 const ALL_NOTES_TAG = "All Notes";
 
 const props = defineProps<{
+  // Liste des tags à afficher dans la sidebar
   tags: {
     libelleName: string;
     isSelected: boolean;
   }[];
+  // Titre optionnel affiché en haut de la sidebar
   title?: string;
+  // État d'ouverture/fermeture de la sidebar (pour mode temporary)
   modelValue?: boolean;
+  // Si true, la sidebar est toujours visible et ne peut pas être fermée
   permanent?: boolean;
+  // Si true, la sidebar est temporaire et peut être ouverte/fermée
   temporary?: boolean;
-  width?: number | string;
 }>();
 
 const emit = defineEmits<{
@@ -106,6 +109,11 @@ function handleTagClick(tag: { libelleName: string; isSelected: boolean }) {
 </script>
 
 <style scoped lang="scss">
+// Largeur par défaut de la sidebar (256px)
+::v-deep(.sidebar-tags) {
+  width: 256px !important;
+}
+
 .sidebar-tags {
   &__title {
     padding: $spacing-16 $spacing-16 $spacing-8 $spacing-16;

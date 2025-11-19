@@ -44,12 +44,37 @@
           {{ tag.libelleName }}
         </v-list-item-title>
       </v-list-item>
+      
+      <v-list-item
+        class="sidebar-tags__add-item"
+        @click="isTagCreationModalOpen = true"
+      >
+        <template v-slot:prepend>
+          <v-icon
+            size="small"
+            color="grey-lighten-1"
+            class="sidebar-tags__item-icon"
+          >
+            mdi-plus
+          </v-icon>
+        </template>
+        
+        <v-list-item-title class="sidebar-tags__item-label">
+          addTag
+        </v-list-item-title>
+      </v-list-item>
     </v-list>
+    
+    <TagCreationModal
+      v-model="isTagCreationModalOpen"
+      @create="handleTagCreate"
+    />
   </v-navigation-drawer>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
+import TagCreationModal from "../TagCreationModal/TagCreationModal.vue";
 
 const ALL_NOTES_TAG = "All Notes";
 
@@ -72,7 +97,10 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: "tag-click", tag: { libelleName: string; isSelected: boolean }): void;
   (e: "update:modelValue", value: boolean): void;
+  (e: "tag-create", tag: { title: string; color: string }): void;
 }>();
+
+const isTagCreationModalOpen = ref(false);
 
 // Filtrer "All Notes" de la liste des tags passés en props pour éviter les doublons
 const filteredTags = computed(() => 
@@ -105,6 +133,10 @@ function handleTagClick(tag: { libelleName: string; isSelected: boolean }) {
     // Si un tag normal est cliqué, émettre l'événement normalement
     emit("tag-click", tag);
   }
+}
+
+function handleTagCreate(tag: { title: string; color: string }) {
+  emit("tag-create", tag);
 }
 </script>
 
@@ -145,6 +177,14 @@ function handleTagClick(tag: { libelleName: string; isSelected: boolean }) {
 
     &-label {
       @include typo-body;
+    }
+  }
+
+  &__add-item {
+    cursor: pointer;
+    
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.04);
     }
   }
 }

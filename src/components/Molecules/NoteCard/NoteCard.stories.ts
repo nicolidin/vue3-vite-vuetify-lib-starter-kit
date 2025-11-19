@@ -72,3 +72,4 @@ WithLongContent.args = {
     tags: ["long", "contenu"]
   }
 };
+

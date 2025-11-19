@@ -70,3 +70,4 @@ defineProps<{
   color: white;
 }
 </style>
+

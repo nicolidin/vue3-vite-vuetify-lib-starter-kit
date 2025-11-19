@@ -5,6 +5,7 @@ import ListNote from "./components/Molecules/ListNote/ListNote.vue";
 import ListUsers from "./components/Molecules/ListUsers/ListUsers.vue";
 import NoteCard from "./components/Molecules/NoteCard/NoteCard.vue";
 import NoteCreation from "./components/Molecules/NoteCreation/NoteCreation.vue";
+import SidebarTags from "./components/Molecules/SidebarTags/SidebarTags.vue";
 import UserCard from "./components/Molecules/UserCard/UserCard.vue";
 import { DEFAULT_VUETIFY_CONFIG } from "./lidinAppKitConfig/vuetifyConfig/defaultVuetifyConfig";
 import { createLidinAppKit } from "./lidinAppKitConfig/createLidinAppKit.ts";
@@ -25,6 +26,7 @@ export {
   ListUsers,
   NoteCard,
   NoteCreation,
+  SidebarTags,
   UserCard,
   generateRandomUuid,
   extractTitleFromMarkdown,

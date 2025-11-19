@@ -1,17 +1,17 @@
 <template>
   <v-app>
-    <v-app-bar app class="header">
-      <v-spacer> </v-spacer>
-      <v-btn-toggle
-        v-model="colorRef"
-        mandatory
-        size="small"
-        class="toggle themeToggle"
-      >
-        <v-btn value="dark" size="small"> dark </v-btn>
-        <v-btn value="light" size="small"> light </v-btn>
-      </v-btn-toggle>
-    </v-app-bar>
+    <Header />
+    <SidebarTags
+      v-if="tags"
+      :tags="tags"
+      :title="sidebarTitle"
+      :model-value="sidebarModelValue"
+      :permanent="sidebarPermanent"
+      :temporary="sidebarTemporary"
+      :width="sidebarWidth"
+      @tag-click="handleTagClick"
+      @update:model-value="handleSidebarUpdate"
+    />
     <v-main
       style="
         --v-layout-left: 0px;
@@ -30,10 +30,51 @@
 </template>
 
 <script setup lang="ts">
+import { ref, watch } from "vue";
+import Header from "../Header/Header.vue";
+import SidebarTags from "../../Molecules/SidebarTags/SidebarTags.vue";
 
-import {useTheme} from "../../../modules/globalAppData/composables/useTheme.ts";
+const props = withDefaults(
+  defineProps<{
+    tags?: {
+      libelleName: string;
+      isSelected: boolean;
+    }[];
+    sidebarTitle?: string;
+    sidebarModelValue?: boolean;
+    sidebarPermanent?: boolean;
+    sidebarTemporary?: boolean;
+    sidebarWidth?: number | string;
+  }>(),
+  {
+    sidebarTitle: "Labels",
+    sidebarModelValue: true,
+    sidebarPermanent: true,
+    sidebarTemporary: false,
+    sidebarWidth: 256,
+  }
+);
 
-const { colorRef } = useTheme();
+const emit = defineEmits<{
+  (e: "tag-click", tag: { libelleName: string; isSelected: boolean }): void;
+  (e: "sidebar-update", value: boolean): void;
+}>();
+
+const sidebarModelValue = ref(props.sidebarModelValue);
+
+// Synchroniser avec les props si elles changent
+watch(() => props.sidebarModelValue, (newValue) => {
+  sidebarModelValue.value = newValue;
+});
+
+function handleTagClick(tag: { libelleName: string; isSelected: boolean }) {
+  emit("tag-click", tag);
+}
+
+function handleSidebarUpdate(value: boolean) {
+  sidebarModelValue.value = value;
+  emit("sidebar-update", value);
+}
 </script>
 
 <style scoped lang="scss">

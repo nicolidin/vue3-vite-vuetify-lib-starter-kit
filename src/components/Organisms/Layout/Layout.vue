@@ -42,6 +42,7 @@ const props = withDefaults(
     tags?: {
       libelleName: string;
       isSelected: boolean;
+      color?: string;
     }[];
     // Titre de la sidebar
     sidebarTitle?: string;

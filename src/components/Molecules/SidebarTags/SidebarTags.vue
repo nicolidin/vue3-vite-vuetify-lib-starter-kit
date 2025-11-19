@@ -41,7 +41,12 @@
         </template>
         
         <v-list-item-title class="sidebar-tags__item-label">
-          {{ tag.libelleName }}
+          <Tag
+            v-if="tag.color"
+            :name="tag.libelleName"
+            :color="tag.color"
+          />
+          <span v-else>{{ tag.libelleName }}</span>
         </v-list-item-title>
       </v-list-item>
       
@@ -74,6 +79,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
+import Tag from "../../Atoms/Tag/Tag.vue";
 import TagCreationModal from "../TagCreationModal/TagCreationModal.vue";
 
 const ALL_NOTES_TAG = "All Notes";
@@ -83,6 +89,7 @@ const props = defineProps<{
   tags: {
     libelleName: string;
     isSelected: boolean;
+    color?: string;
   }[];
   // Titre optionnel affiché en haut de la sidebar
   title?: string;

@@ -16,24 +16,19 @@
     <template v-slot:item="{ props, item }">
       <v-list-item v-bind="props">
         <template v-slot:prepend>
-          <div
-            class="tag-dropdown__color-indicator"
-            :style="{
-              backgroundColor: item.raw.color,
-            }"
-          ></div>
+          <Tag
+            :name="item.raw.title"
+            :color="item.raw.color"
+          />
         </template>
       </v-list-item>
     </template>
     <template v-slot:chip="{ props, item }">
       <v-chip v-bind="props">
-        <div
-          class="tag-dropdown__color-chip"
-          :style="{
-            backgroundColor: item.raw.color,
-          }"
-        ></div>
-        {{ item.raw.title }}
+        <Tag
+          :name="item.raw.title"
+          :color="item.raw.color"
+        />
       </v-chip>
     </template>
   </Dropdown>
@@ -41,6 +36,7 @@
 
 <script setup lang="ts">
 import Dropdown from "../../Atoms/Dropdown/Dropdown.vue";
+import Tag from "../../Atoms/Tag/Tag.vue";
 
 // Type pour les tags
 type TagType = {
@@ -89,20 +85,6 @@ function handleUpdate(value: string | string[]) {
 </script>
 
 <style scoped lang="scss">
-.tag-dropdown {
-  &__color-indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 8px;
-  }
-
-  &__color-chip {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-right: 6px;
-  }
-}
+// Styles spécifiques si nécessaire
 </style>
 

@@ -1,4 +1,5 @@
 import Dropdown from "./components/Atoms/Dropdown/Dropdown.vue";
+import Tag from "./components/Atoms/Tag/Tag.vue";
 import MarkdownText from "./components/Molecules/MarkdownText/MarkdownText.vue";
 import Layout from "./components/Organisms/Layout/Layout.vue";
 import ListLayout from "./components/Molecules/ListLayout/ListLayout.vue";
@@ -22,6 +23,7 @@ export {
   createLidinAppKit,
   DEFAULT_VUETIFY_CONFIG,
   Dropdown,
+  Tag,
   MarkdownText,
   Layout,
   ListLayout,

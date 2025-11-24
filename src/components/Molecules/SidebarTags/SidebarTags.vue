@@ -42,11 +42,9 @@
         
         <v-list-item-title class="sidebar-tags__item-label">
           <Tag
-            v-if="tag.color"
             :name="tag.libelleName"
-            :color="tag.color"
+            :color="tag.color || '#9E9E9E'"
           />
-          <span v-else>{{ tag.libelleName }}</span>
         </v-list-item-title>
       </v-list-item>
       

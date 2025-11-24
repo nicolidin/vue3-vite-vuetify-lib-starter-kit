@@ -32,6 +32,7 @@ const Template = (args: any) => ({
       tags.value.push({
         libelleName: newTag.title,
         isSelected: false,
+        color: newTag.color,
       });
       console.log("Tag created:", newTag);
     };
@@ -68,12 +69,12 @@ Default.args = {
   title: "Labels",
   permanent: true,
   tags: [
-    { libelleName: "Important", isSelected: false },
-    { libelleName: "Work", isSelected: false },
-    { libelleName: "Personal", isSelected: false },
-    { libelleName: "Shopping", isSelected: false },
-    { libelleName: "Ideas", isSelected: false },
-    { libelleName: "Recipes", isSelected: false },
+    { libelleName: "Important", isSelected: false, color: "#FF6B6B" },
+    { libelleName: "Work", isSelected: false, color: "#4ECDC4" },
+    { libelleName: "Personal", isSelected: false, color: "#45B7D1" },
+    { libelleName: "Shopping", isSelected: false, color: "#FFA07A" },
+    { libelleName: "Ideas", isSelected: false, color: "#98D8C8" },
+    { libelleName: "Recipes", isSelected: false, color: "#F7DC6F" },
   ],
 };
 
@@ -89,16 +90,16 @@ ManyTags.args = {
   title: "My Labels",
   permanent: true,
   tags: [
-    { libelleName: "Important", isSelected: false },
-    { libelleName: "Work", isSelected: false },
-    { libelleName: "Personal", isSelected: false },
-    { libelleName: "Shopping", isSelected: false },
-    { libelleName: "Ideas", isSelected: false },
-    { libelleName: "Recipes", isSelected: false },
-    { libelleName: "Travel", isSelected: false },
-    { libelleName: "Health", isSelected: false },
-    { libelleName: "Finance", isSelected: false },
-    { libelleName: "Projects", isSelected: false },
+    { libelleName: "Important", isSelected: false, color: "#FF6B6B" },
+    { libelleName: "Work", isSelected: false, color: "#4ECDC4" },
+    { libelleName: "Personal", isSelected: false, color: "#45B7D1" },
+    { libelleName: "Shopping", isSelected: false, color: "#FFA07A" },
+    { libelleName: "Ideas", isSelected: false, color: "#98D8C8" },
+    { libelleName: "Recipes", isSelected: false, color: "#F7DC6F" },
+    { libelleName: "Travel", isSelected: false, color: "#BB8FCE" },
+    { libelleName: "Health", isSelected: false, color: "#85C1E2" },
+    { libelleName: "Finance", isSelected: false, color: "#F1948A" },
+    { libelleName: "Projects", isSelected: false, color: "#82E0AA" },
   ],
 };
 

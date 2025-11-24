@@ -65,3 +65,27 @@ export const MultipleTags: any = () => ({
   `,
 });
 
+export const ChipStyle: any = Template.bind({});
+ChipStyle.args = {
+  name: "Important",
+  color: "#FF6B6B",
+  chipStyle: true,
+};
+
+export const MultipleChipTags: any = () => ({
+  components: { Tag },
+  template: `
+    <v-app>
+      <v-main>
+        <div style="padding: 2rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          <Tag name="Important" color="#FF6B6B" :chip-style="true" />
+          <Tag name="Work" color="#4ECDC4" :chip-style="true" />
+          <Tag name="Personal" color="#45B7D1" :chip-style="true" />
+          <Tag name="Shopping" color="#FFA07A" :chip-style="true" />
+          <Tag name="Ideas" color="#98D8C8" :chip-style="true" />
+        </div>
+      </v-main>
+    </v-app>
+  `,
+});
+

@@ -15,7 +15,7 @@
   >
     <template v-slot:item="{ props, item }">
       <v-list-item v-bind="props">
-        <template v-slot:prepend>
+        <template v-slot:title>
           <Tag
             :name="item.raw.title"
             :color="item.raw.color"

@@ -14,21 +14,23 @@
     @update:model-value="handleUpdate"
     v-bind="$attrs"
   >
-    <slot></slot>
+    <template v-for="(_, name) in $slots" :key="name" v-slot:[name]="slotProps">
+      <slot :name="name" v-bind="slotProps"></slot>
+    </template>
   </v-select>
 </template>
 
 <script setup lang="ts">
-const props = withDefaults(
+withDefaults(
   defineProps<{
     // Valeur sélectionnée (peut être un string, number, array, etc.)
     modelValue: any;
     // Liste des items à afficher
     items: any[];
     // Propriété à utiliser comme titre pour chaque item
-    itemTitle?: string | ((item: any) => string);
+    itemTitle?: string | ((_item: any) => string);
     // Propriété à utiliser comme valeur pour chaque item
-    itemValue?: string | ((item: any) => any);
+    itemValue?: string | ((_item: any) => any);
     // Label du dropdown
     label?: string;
     // Si true, permet la sélection multiple
@@ -56,7 +58,7 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: any): void;
+  (_e: "update:modelValue", _value: any): void;
 }>();
 
 function handleUpdate(value: any) {

@@ -13,6 +13,16 @@
     :disabled="disabled"
     @update:model-value="handleUpdate"
   >
+    <template v-slot:item="{ props: itemProps, item }">
+      <v-list-item v-bind="itemProps">
+        <template v-slot:title>
+          <Tag
+            :name="item.raw.title"
+            :color="item.raw.color"
+          />
+        </template>
+      </v-list-item>
+    </template>
   </Dropdown>
 </template>
 
@@ -47,7 +57,7 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: string[]): void;
+  (_e: "update:modelValue", _value: string[]): void;
 }>();
 
 const normalizedModelValue = computed(() => {

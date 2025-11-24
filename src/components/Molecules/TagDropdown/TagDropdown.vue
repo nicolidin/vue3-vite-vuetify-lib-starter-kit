@@ -13,22 +13,6 @@
     :disabled="disabled"
     @update:model-value="handleUpdate"
   >
-    <template v-slot:item="{ props, item }">
-      <v-list-item v-bind="props">
-        <template v-slot:title>
-          <Tag :name="item.raw.title" :color="item.raw.color" />
-        </template>
-      </v-list-item>
-    </template>
-    <template v-slot:chip="{ item }">
-      <Tag
-        v-if="item.raw"
-        :name="item.raw.title"
-        :color="item.raw.color"
-        :chip-style="true"
-        class="tag-dropdown__selected-tag"
-      />
-    </template>
   </Dropdown>
 </template>
 

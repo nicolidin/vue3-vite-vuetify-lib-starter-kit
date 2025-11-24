@@ -71,15 +71,7 @@ const normalizedModelValue = computed(() => {
 });
 
 function handleUpdate(value: any) {
-  // Empêcher la suppression des tags via les chips (readonly)
   const newIds = Array.isArray(value) ? value : [];
-  const currentIds = normalizedModelValue.value;
-
-  // Si on essaie de réduire le nombre de sélections, ignorer la modification
-  if (newIds.length < currentIds.length) {
-    return;
-  }
-
   emit("update:modelValue", newIds);
 }
 </script>

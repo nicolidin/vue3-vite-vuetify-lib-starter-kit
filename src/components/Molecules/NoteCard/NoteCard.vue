@@ -2,11 +2,14 @@
   <div class="note-card">
     <h3>{{ title }}</h3>
     <p>{{ contentWithoutTitle }}</p>
-    <div class="note-meta" v-if="note.tags && note.tags.length > 0">
-      <span class="tag" v-for="tag in note.tags" :key="tag">{{ tag }}</span>
-    </div>
-    <div class="note-status" v-if="note.status">
-      <span :class="['status', note.status]">{{ note.status }}</span>
+    <div class="note-meta" v-if="normalizedTags.length > 0">
+      <Tag
+        v-for="tag in normalizedTags"
+        :key="tag.name"
+        :name="tag.name"
+        :color="tag.color"
+        :chip-style="true"
+      />
     </div>
   </div>
 </template>
@@ -14,32 +17,36 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { extractTitleFromMarkdown } from '../../../services/utils/markdownUtils'
+import Tag from '../../Atoms/Tag/Tag.vue'
 
 const props = defineProps<{
   note: {
     id: string | number
     contentMd: string
     createdAt: string
-    status?: 'active' | 'completed'
-    priority?: 'high' | 'medium' | 'low'
-    tags?: string[]
+    tags?: string[] | { title: string; color: string }[]
   }
 }>()
 
-// Extract title from markdown content
-const title = computed(() => {
-  const extractedTitle = extractTitleFromMarkdown(props.note.contentMd)
-  return extractedTitle || 'Sans titre'
-})
+const title = computed(() => 
+  extractTitleFromMarkdown(props.note.contentMd) || 'Sans titre'
+)
 
-// Get content without the title line
 const contentWithoutTitle = computed(() => {
   const lines = props.note.contentMd.split('\n')
-  // If first line starts with #, skip it
-  if (lines[0]?.trim().startsWith('#')) {
-    return lines.slice(1).join('\n').trim()
-  }
-  return props.note.contentMd
+  return lines[0]?.trim().startsWith('#') 
+    ? lines.slice(1).join('\n').trim()
+    : props.note.contentMd
+})
+
+const normalizedTags = computed(() => {
+  if (!props.note.tags?.length) return []
+  
+  return props.note.tags.map(tag => 
+    typeof tag === 'string' 
+      ? { name: tag, color: '#9E9E9E' }
+      : { name: tag.title, color: tag.color }
+  )
 })
 </script>
 
@@ -59,33 +66,5 @@ const contentWithoutTitle = computed(() => {
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem;
-}
-
-.tag {
-  background-color: #e0e0e0;
-  padding: 0.125rem 0.25rem;
-  border-radius: 0.25rem;
-  font-size: 0.75rem;
-}
-
-.note-status {
-  margin-top: auto;
-}
-
-.status {
-  padding: 0.125rem 0.25rem;
-  border-radius: 0.25rem;
-  font-size: 0.75rem;
-  font-weight: bold;
-}
-
-.status.active {
-  background-color: #4caf50;
-  color: white;
-}
-
-.status.completed {
-  background-color: #2196f3;
-  color: white;
 }
 </style>

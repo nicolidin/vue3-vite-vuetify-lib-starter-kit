@@ -20,10 +20,10 @@ const Template = (args: any) => ({
   setup() {
     const tags = ref(args.tags || []);
     const onTagClick = (clickedTag: { libelleName: string; isSelected: boolean }) => {
-      // Toggle selection state
+      // Le composant émet déjà l'état final souhaité, on applique directement
       const tag = tags.value.find((t: { libelleName: string; isSelected: boolean }) => t.libelleName === clickedTag.libelleName);
       if (tag) {
-        tag.isSelected = !tag.isSelected;
+        tag.isSelected = clickedTag.isSelected;
       }
       console.log("Tag clicked:", clickedTag);
     };

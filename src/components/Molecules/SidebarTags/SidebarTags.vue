@@ -130,13 +130,14 @@ const allTagsWithDefault = computed(() => {
 function handleTagClick(tag: { libelleName: string; isSelected: boolean }) {
   // Si "All Notes" est cliqué, on désélectionne tous les autres tags
   if (tag.libelleName === ALL_NOTES_TAG) {
-    // Émettre un événement pour chaque tag sélectionné pour les désélectionner
+    // Émettre un événement pour chaque tag sélectionné avec l'état final souhaité (false)
     filteredTags.value
       .filter(t => t.isSelected)
       .forEach(t => emit("tag-click", { ...t, isSelected: false }));
   } else {
-    // Si un tag normal est cliqué, émettre l'événement normalement
-    emit("tag-click", tag);
+    // Pour un tag normal, calculer le nouvel état (toggle) et émettre l'état final souhaité
+    const newSelectedState = !tag.isSelected;
+    emit("tag-click", { ...tag, isSelected: newSelectedState });
   }
 }
 

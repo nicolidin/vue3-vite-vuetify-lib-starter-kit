@@ -20,9 +20,11 @@ const Template = (args: any) => ({
   setup() {
     const tags = ref(args.tags || []);
     const onTagClick = (clickedTag: { libelleName: string; isSelected: boolean }) => {
+      // Le composant SidebarTags gère le toggle en interne et émet l'état final souhaité
+      // On applique directement l'état isSelected reçu
       const tag = tags.value.find((t: { libelleName: string; isSelected: boolean }) => t.libelleName === clickedTag.libelleName);
       if (tag) {
-        tag.isSelected = !tag.isSelected;
+        tag.isSelected = clickedTag.isSelected;
       }
       console.log("Tag clicked:", clickedTag);
     };

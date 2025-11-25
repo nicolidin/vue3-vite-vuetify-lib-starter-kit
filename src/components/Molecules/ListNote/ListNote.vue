@@ -1,7 +1,7 @@
 <template>
   <ListLayout>
     <NoteCard
-        v-for="note in notes"
+        v-for="note in notesWithTags"
         :key="note.id"
         :note="note"
     />
@@ -9,17 +9,44 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import ListLayout from '../ListLayout/ListLayout.vue'
 import NoteCard from '../NoteCard/NoteCard.vue'
 
-defineProps<{
+const props = defineProps<{
   notes: {
     id: string | number
     contentMd: string
     createdAt: string
-    status?: 'active' | 'completed'
-    priority?: 'high' | 'medium' | 'low'
-    tags?: string[]
+    tags?: string[] | { title: string; color: string }[]
+    tagIds?: string[]
+  }[]
+  availableTags?: {
+    id: string
+    title: string
+    color: string
   }[]
 }>()
+
+const notesWithTags = computed(() => {
+  return props.notes.map(note => {
+    // Si la note a déjà des tags, on les garde
+    if (note.tags) {
+      return note
+    }
+    
+    // Si la note a des tagIds et qu'on a availableTags, on les convertit
+    if (note.tagIds && props.availableTags) {
+      const tags = note.tagIds
+        .map(tagId => props.availableTags?.find(t => t.id === tagId))
+        .filter(Boolean)
+        .map(tag => ({ title: tag!.title, color: tag!.color }))
+      
+      return { ...note, tags }
+    }
+    
+    // Sinon, on retourne la note sans tags
+    return { ...note, tags: [] }
+  })
+})
 </script>

@@ -4,7 +4,7 @@
     :model-value="normalizedModelValue"
     :items="tags"
     item-title="title"
-    item-value="id"
+    item-value="frontId"
     :label="label"
     multiple
     chips
@@ -33,7 +33,7 @@ import Tag from "../../Atoms/Tag/Tag.vue";
 
 // Type pour les tags
 type TagType = {
-  id: string;
+  frontId: string;
   title: string;
   color: string;
 };
@@ -65,7 +65,34 @@ const normalizedModelValue = computed(() => {
 });
 
 function handleUpdate(value: any) {
-  const newIds = Array.isArray(value) ? value : [];
+  // Vuetify peut retourner des objets complets au lieu des valeurs seulement
+  // On doit extraire les frontId
+  let newIds: string[] = [];
+  
+  if (Array.isArray(value)) {
+    newIds = value.map(v => {
+      // Si c'est déjà une string (frontId), on la garde
+      if (typeof v === 'string') {
+        return v;
+      }
+      // Si c'est un objet, on extrait le frontId
+      if (typeof v === 'object' && v !== null && 'frontId' in v) {
+        return String(v.frontId);
+      }
+      // Sinon, on convertit en string
+      return String(v);
+    });
+  } else if (value !== null && value !== undefined) {
+    // Si c'est une seule valeur
+    if (typeof value === 'string') {
+      newIds = [value];
+    } else if (typeof value === 'object' && 'frontId' in value) {
+      newIds = [String(value.frontId)];
+    } else {
+      newIds = [String(value)];
+    }
+  }
+  
   emit("update:modelValue", newIds);
 }
 </script>

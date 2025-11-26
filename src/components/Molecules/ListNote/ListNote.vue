@@ -2,7 +2,7 @@
   <ListLayout>
     <NoteCard
         v-for="note in notesWithTags"
-        :key="note.id"
+        :key="note.frontId"
         :note="note"
     />
   </ListLayout>
@@ -15,14 +15,14 @@ import NoteCard from '../NoteCard/NoteCard.vue'
 
 const props = defineProps<{
   notes: {
-    id: string | number
+    frontId: string | number
     contentMd: string
     createdAt: string
     tags?: string[] | { title: string; color: string }[]
     tagIds?: string[]
   }[]
   availableTags?: {
-    id: string
+    frontId: string
     title: string
     color: string
   }[]
@@ -36,9 +36,13 @@ const notesWithTags = computed(() => {
     }
     
     // Si la note a des tagIds et qu'on a availableTags, on les convertit
-    if (note.tagIds && props.availableTags) {
+    if (note.tagIds && props.availableTags && note.tagIds.length > 0) {
       const tags = note.tagIds
-        .map(tagId => props.availableTags?.find(t => t.id === tagId))
+        .map(tagId => {
+          // Convertir tagId en string pour la comparaison
+          const tagIdStr = String(tagId);
+          return props.availableTags?.find(t => String(t.frontId) === tagIdStr);
+        })
         .filter(Boolean)
         .map(tag => ({ title: tag!.title, color: tag!.color }))
       

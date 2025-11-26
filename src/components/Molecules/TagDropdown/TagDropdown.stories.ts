@@ -45,11 +45,11 @@ export const Default: any = Template.bind({});
 Default.args = {
   initialValue: [],
   tags: [
-    { id: "1", title: "Important", color: "#FF6B6B" },
-    { id: "2", title: "Work", color: "#4ECDC4" },
-    { id: "3", title: "Personal", color: "#45B7D1" },
-    { id: "4", title: "Shopping", color: "#FFA07A" },
-    { id: "5", title: "Ideas", color: "#98D8C8" },
+    { frontId: "1", title: "Important", color: "#FF6B6B" },
+    { frontId: "2", title: "Work", color: "#4ECDC4" },
+    { frontId: "3", title: "Personal", color: "#45B7D1" },
+    { frontId: "4", title: "Shopping", color: "#FFA07A" },
+    { frontId: "5", title: "Ideas", color: "#98D8C8" },
   ],
 };
 
@@ -57,11 +57,11 @@ export const WithPreselectedTags: any = Template.bind({});
 WithPreselectedTags.args = {
   initialValue: ["1", "3"],
   tags: [
-    { id: "1", title: "Important", color: "#FF6B6B" },
-    { id: "2", title: "Work", color: "#4ECDC4" },
-    { id: "3", title: "Personal", color: "#45B7D1" },
-    { id: "4", title: "Shopping", color: "#FFA07A" },
-    { id: "5", title: "Ideas", color: "#98D8C8" },
+    { frontId: "1", title: "Important", color: "#FF6B6B" },
+    { frontId: "2", title: "Work", color: "#4ECDC4" },
+    { frontId: "3", title: "Personal", color: "#45B7D1" },
+    { frontId: "4", title: "Shopping", color: "#FFA07A" },
+    { frontId: "5", title: "Ideas", color: "#98D8C8" },
   ],
 };
 

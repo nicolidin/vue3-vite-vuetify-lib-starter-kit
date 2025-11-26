@@ -41,7 +41,7 @@ import TagDropdown from "../TagDropdown/TagDropdown.vue";
 
 // Type pour les tags
 type TagType = {
-  id: string;
+  frontId: string;
   title: string;
   color: string;
 };

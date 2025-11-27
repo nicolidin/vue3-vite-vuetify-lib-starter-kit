@@ -10,6 +10,8 @@ import NoteCreation from "./components/Molecules/NoteCreation/NoteCreation.vue";
 import SidebarTags from "./components/Molecules/SidebarTags/SidebarTags.vue";
 import TagDropdown from "./components/Molecules/TagDropdown/TagDropdown.vue";
 import UserCard from "./components/Molecules/UserCard/UserCard.vue";
+import LoginForm from "./components/Molecules/LoginForm/LoginForm.vue";
+import RegisterForm from "./components/Molecules/RegisterForm/RegisterForm.vue";
 import { DEFAULT_VUETIFY_CONFIG } from "./lidinAppKitConfig/vuetifyConfig/defaultVuetifyConfig";
 import { createLidinAppKit } from "./lidinAppKitConfig/createLidinAppKit.ts";
 import { useLanguage } from "./modules/globalAppData/composables/useLanguage.ts";
@@ -34,6 +36,8 @@ export {
   SidebarTags,
   TagDropdown,
   UserCard,
+  LoginForm,
+  RegisterForm,
   generateRandomUuid,
   extractTitleFromMarkdown,
 };

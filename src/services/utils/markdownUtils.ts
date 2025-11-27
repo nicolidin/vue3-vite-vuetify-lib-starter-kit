@@ -4,6 +4,9 @@
  * @returns The extracted title or null if no title found
  */
 export const extractTitleFromMarkdown = (contentMd: string): string | null => {
+  // ✅ Sécurité : vérifier que contentMd existe avant d'appeler split
+  if (!contentMd) return null;
+  
   const lines = contentMd.split('\n');
   const firstLine = lines[0]?.trim();
   

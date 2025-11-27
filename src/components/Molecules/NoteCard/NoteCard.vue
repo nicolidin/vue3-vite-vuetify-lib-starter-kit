@@ -28,11 +28,15 @@ const props = defineProps<{
   }
 }>()
 
-const title = computed(() => 
-  extractTitleFromMarkdown(props.note.contentMd) || 'Sans titre'
-)
+const title = computed(() => {
+  if (!props.note.contentMd) return 'Sans titre'
+  return extractTitleFromMarkdown(props.note.contentMd) || 'Sans titre'
+})
 
 const contentWithoutTitle = computed(() => {
+  // ✅ Sécurité : vérifier que contentMd existe avant d'appeler split
+  if (!props.note.contentMd) return ''
+  
   const lines = props.note.contentMd.split('\n')
   return lines[0]?.trim().startsWith('#') 
     ? lines.slice(1).join('\n').trim()

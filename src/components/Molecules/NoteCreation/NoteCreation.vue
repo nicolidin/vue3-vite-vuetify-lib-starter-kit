@@ -52,7 +52,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: "create", val: { title: string; contentMd: string; tagIds: string[] }): void;
+  (e: "create", val: { title: string; contentMd: string; tagsFrontId: string[] }): void;
 }>();
 
 const title = ref("");
@@ -63,7 +63,7 @@ function emitNote() {
   emit("create", {
     title: title.value,
     contentMd: contentMd.value,
-    tagIds: selectedTagIds.value,
+    tagsFrontId: selectedTagIds.value,
   });
   resetForm();
 }

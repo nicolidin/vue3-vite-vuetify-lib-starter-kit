@@ -2,6 +2,7 @@
   <div class="note-card">
     <h3>{{ title }}</h3>
     <p>{{ contentWithoutTitle }}</p>
+    tags:{{normalizedTags}}
     <div class="note-meta" v-if="normalizedTags.length > 0">
       <Tag
         v-for="tag in normalizedTags"
@@ -36,18 +37,18 @@ const title = computed(() => {
 const contentWithoutTitle = computed(() => {
   // ✅ Sécurité : vérifier que contentMd existe avant d'appeler split
   if (!props.note.contentMd) return ''
-  
+
   const lines = props.note.contentMd.split('\n')
-  return lines[0]?.trim().startsWith('#') 
+  return lines[0]?.trim().startsWith('#')
     ? lines.slice(1).join('\n').trim()
     : props.note.contentMd
 })
 
 const normalizedTags = computed(() => {
   if (!props.note.tags?.length) return []
-  
-  return props.note.tags.map(tag => 
-    typeof tag === 'string' 
+
+  return props.note.tags.map(tag =>
+    typeof tag === 'string'
       ? { name: tag, color: '#9E9E9E' }
       : { name: tag.title, color: tag.color }
   )

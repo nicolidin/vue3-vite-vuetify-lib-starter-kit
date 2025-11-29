@@ -2,7 +2,6 @@
   <div class="note-card">
     <h3>{{ title }}</h3>
     <p>{{ contentWithoutTitle }}</p>
-    tags:{{normalizedTags}}
     <div class="note-meta" v-if="normalizedTags.length > 0">
       <Tag
         v-for="tag in normalizedTags"

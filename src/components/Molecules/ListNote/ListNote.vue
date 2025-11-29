@@ -2,7 +2,7 @@
   <ListLayout>
     <NoteCard
         v-for="note in notesWithTags"
-        :key="note.frontId"
+        :key="note.id"
         :note="note"
     />
   </ListLayout>
@@ -15,15 +15,14 @@ import NoteCard from '../NoteCard/NoteCard.vue'
 
 const props = defineProps<{
   notes: {
-    frontId: string | number
+    id: string | number
     contentMd: string
     createdAt: string
     tags?: string[] | { title: string; color: string }[]
-    tagsFrontId?: string[] // ✅ Sémantique : tagsFrontId sont TOUJOURS des frontId (jamais des _id MongoDB)
+    tagsId?: string[] // ✅ Sémantique : tagsId sont TOUJOURS des id (jamais des _id MongoDB)
   }[]
   availableTags?: {
-    frontId: string // ✅ frontId généré côté front (offline first) - utilisé pour le mapping
-    _id?: string // _id MongoDB utilisé par le backend (pas utilisé pour le mapping)
+    id: string // ✅ id généré côté front (offline first) - utilisé pour le mapping
     title: string
     color: string
   }[]
@@ -36,14 +35,14 @@ const notesWithTags = computed(() => {
       return note
     }
 
-    // ✅ Mapping UNIQUEMENT par frontId (sémantique explicite)
-    // Les tagsFrontId dans les notes sont TOUJOURS des frontId, jamais des _id MongoDB
-    // frontId est l'identifiant côté frontend pour l'offline first
-    if (note.tagsFrontId && props.availableTags && note.tagsFrontId.length > 0) {
-      const tags = note.tagsFrontId
-        .map(tagFrontId => {
-          // Chercher le tag par son frontId uniquement (pas de recherche par _id MongoDB)
-          return props.availableTags?.find(t => String(t.frontId) === String(tagFrontId))
+    // ✅ Mapping UNIQUEMENT par id (sémantique explicite)
+    // Les tagsId dans les notes sont TOUJOURS des id, jamais des _id MongoDB
+    // id est l'identifiant côté frontend pour l'offline first
+    if (note.tagsId && props.availableTags && note.tagsId.length > 0) {
+      const tags = note.tagsId
+        .map(tagId => {
+          // Chercher le tag par son id uniquement (pas de recherche par _id MongoDB)
+          return props.availableTags?.find(t => String(t.id) === String(tagId))
         })
         .filter(Boolean)
         .map(tag => ({ title: tag!.title, color: tag!.color }))

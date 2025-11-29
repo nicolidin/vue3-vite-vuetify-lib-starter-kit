@@ -32,14 +32,14 @@ export const Default = Template.bind({});
 Default.args = {
   notes: [
     {
-      frontId: 1,
+      id: 1,
       contentMd: "# Ma première note\n\nCeci est le contenu de ma première note avec un titre.",
       createdAt: "2024-01-01",
       status: "active",
       tags: ["test", "première"]
     },
     {
-      frontId: 2,
+      id: 2,
       contentMd: "# Note importante\n\nCette note est très importante pour le projet.",
       createdAt: "2024-01-02",
       status: "completed",
@@ -47,7 +47,7 @@ Default.args = {
       priority: "high"
     },
     {
-      frontId: 3,
+      id: 3,
       contentMd: "Cette note n'a pas de titre dans le markdown.",
       createdAt: "2024-01-03",
       status: "active",
@@ -65,35 +65,35 @@ export const WithManyNotes = Template.bind({});
 WithManyNotes.args = {
   notes: [
     {
-      frontId: 1,
+      id: 1,
       contentMd: "# Note 1\n\nContenu de la note 1",
       createdAt: "2024-01-01",
       status: "active",
       tags: ["tag1"]
     },
     {
-      frontId: 2,
+      id: 2,
       contentMd: "# Note 2\n\nContenu de la note 2",
       createdAt: "2024-01-02",
       status: "completed",
       tags: ["tag2", "important"]
     },
     {
-      frontId: 3,
+      id: 3,
       contentMd: "# Note 3\n\nContenu de la note 3",
       createdAt: "2024-01-03",
       status: "active",
       tags: ["tag3"]
     },
     {
-      frontId: 4,
+      id: 4,
       contentMd: "# Note 4\n\nContenu de la note 4",
       createdAt: "2024-01-04",
       status: "completed",
       tags: ["tag4", "urgent"]
     },
     {
-      frontId: 5,
+      id: 5,
       contentMd: "Note sans titre",
       createdAt: "2024-01-05",
       status: "active",

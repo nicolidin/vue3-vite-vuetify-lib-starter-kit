@@ -19,7 +19,7 @@ const Template = (args: any) => ({
   components: { NoteCreation },
   setup() {
     const lastNote = ref<any>(null);
-    const onCreate = (note: { title: string; contentMd: string; tagsFrontId: string[] }) => {
+    const onCreate = (note: { title: string; contentMd: string; tagsId: string[] }) => {
       lastNote.value = note;
       console.log("Note créée:", note);
     };
@@ -46,11 +46,11 @@ Default.args = {};
 export const WithTags: any = Template.bind({});
 WithTags.args = {
   tags: [
-    { frontId: "1", title: "Important", color: "#FF6B6B" },
-    { frontId: "2", title: "Work", color: "#4ECDC4" },
-    { frontId: "3", title: "Personal", color: "#45B7D1" },
-    { frontId: "4", title: "Shopping", color: "#FFA07A" },
-    { frontId: "5", title: "Ideas", color: "#98D8C8" },
+    { id: "1", title: "Important", color: "#FF6B6B" },
+    { id: "2", title: "Work", color: "#4ECDC4" },
+    { id: "3", title: "Personal", color: "#45B7D1" },
+    { id: "4", title: "Shopping", color: "#FFA07A" },
+    { id: "5", title: "Ideas", color: "#98D8C8" },
   ],
 };
 

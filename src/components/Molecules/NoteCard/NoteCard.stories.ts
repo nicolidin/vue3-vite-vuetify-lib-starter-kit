@@ -31,7 +31,7 @@ const Template = (args) => ({
 export const Default = Template.bind({});
 Default.args = {
   note: {
-    frontId: 1,
+    id: 1,
     contentMd: "# Ma Note\n\nCeci est le contenu de ma note avec un titre extrait automatiquement.",
     createdAt: "2024-01-01",
     status: "active",
@@ -42,7 +42,7 @@ Default.args = {
 export const WithTitle = Template.bind({});
 WithTitle.args = {
   note: {
-    frontId: 2,
+    id: 2,
     contentMd: "# Note importante\n\nCette note est très importante pour le projet.",
     createdAt: "2024-01-02",
     status: "completed",
@@ -54,7 +54,7 @@ WithTitle.args = {
 export const WithoutTitle = Template.bind({});
 WithoutTitle.args = {
   note: {
-    frontId: 3,
+    id: 3,
     contentMd: "Cette note n'a pas de titre dans le markdown.",
     createdAt: "2024-01-03",
     status: "active",
@@ -65,7 +65,7 @@ WithoutTitle.args = {
 export const WithLongContent = Template.bind({});
 WithLongContent.args = {
   note: {
-    frontId: 4,
+    id: 4,
     contentMd: "# Note avec contenu long\n\nCeci est une note avec un contenu beaucoup plus long qui va probablement déborder de la carte et nécessiter un scroll ou une gestion de l'overflow. Le titre sera extrait automatiquement de la première ligne qui commence par #.",
     createdAt: "2024-01-04",
     status: "active",

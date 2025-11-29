@@ -21,7 +21,7 @@ import Tag from '../../Atoms/Tag/Tag.vue'
 
 const props = defineProps<{
   note: {
-    frontId: string | number
+    id: string | number
     contentMd: string
     createdAt: string
     tags?: string[] | { title: string; color: string }[]

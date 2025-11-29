@@ -41,7 +41,7 @@ import TagDropdown from "../TagDropdown/TagDropdown.vue";
 
 // Type pour les tags
 type TagType = {
-  frontId: string;
+  id: string;
   title: string;
   color: string;
 };
@@ -52,7 +52,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: "create", val: { title: string; contentMd: string; tagsFrontId: string[] }): void;
+  (e: "create", val: { title: string; contentMd: string; tagsId: string[] }): void;
 }>();
 
 const title = ref("");
@@ -63,7 +63,7 @@ function emitNote() {
   emit("create", {
     title: title.value,
     contentMd: contentMd.value,
-    tagsFrontId: selectedTagIds.value,
+    tagsId: selectedTagIds.value,
   });
   resetForm();
 }

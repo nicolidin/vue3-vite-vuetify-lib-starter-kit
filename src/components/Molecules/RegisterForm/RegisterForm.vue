@@ -92,8 +92,8 @@ const emit = defineEmits<{
 }>();
 
 const passwordMismatch = computed(() => {
-  return props.password !== '' && 
-         props.confirmPassword !== '' && 
+  return props.password !== '' &&
+         props.confirmPassword !== '' &&
          props.password !== props.confirmPassword;
 });
 

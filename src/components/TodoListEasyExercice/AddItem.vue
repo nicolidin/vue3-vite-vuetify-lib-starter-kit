@@ -20,7 +20,6 @@ const emit = defineEmits<{
 const text = ref("");
 
 function emitAdd() {
-  if (!text.value.trim()) return;
   emit("add", text.value);
   text.value = "";
 }

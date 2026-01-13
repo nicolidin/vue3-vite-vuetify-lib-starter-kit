@@ -3,6 +3,8 @@ import Tag from "./components/Atoms/Tag/Tag.vue";
 import MarkdownText from "./components/Molecules/MarkdownText/MarkdownText.vue";
 import Layout from "./components/Organisms/Layout/Layout.vue";
 import ListLayout from "./components/Molecules/ListLayout/ListLayout.vue";
+import TodoList from "./components/TodoListEasyExercice/TodoList.vue";
+import TodoListVModel from "./components/TodoListEasyExercice/TodoListVModel.vue";
 import ListNote from "./components/Molecules/ListNote/ListNote.vue";
 import ListUsers from "./components/Molecules/ListUsers/ListUsers.vue";
 import NoteCard from "./components/Molecules/NoteCard/NoteCard.vue";
@@ -38,6 +40,8 @@ export {
   UserCard,
   LoginForm,
   RegisterForm,
+  TodoList,
+  TodoListVModel,
   generateRandomUuid,
   extractTitleFromMarkdown,
 };

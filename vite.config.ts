@@ -3,9 +3,12 @@ import * as path from "path";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 
+const isWatch = process.env.BUILD_WATCH === "1";
+
 export default defineConfig({
-  plugins: [vue(), dts()],
+  plugins: [vue(), ...(isWatch ? [] : [dts()])],
   build: {
+    emptyOutDir: false,
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
       name: "VueLibExoCorrected",

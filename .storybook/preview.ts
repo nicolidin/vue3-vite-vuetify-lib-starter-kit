@@ -24,14 +24,13 @@ setup((app) => {
 });
 
 export const decorators = [
-  (story) => ({
-    components: { story, Layout },
-    template: `
-      <Layout>
-        <story/>
-      </Layout>
-    `,
-  }),
+  (story, context) => {
+    const id = String(context.id || context.title || "").toLowerCase();
+    if (id.includes("sidebartags")) {
+      return { template: "<story />", components: { story } };
+    }
+    return { components: { story, Layout }, template: "<Layout><story/></Layout>" };
+  },
 ];
 
 export const parameters = {

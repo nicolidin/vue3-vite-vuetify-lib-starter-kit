@@ -1,4 +1,5 @@
 import { ref } from "vue";
+import Layout from "../../Organisms/Layout/Layout.vue";
 import SidebarTags from "./SidebarTags.vue";
 
 export default {
@@ -9,58 +10,42 @@ export default {
     docs: {
       description: {
         component:
-          "Composant sidebar pour afficher une liste de tags sélectionnables, inspiré de Google Keep.",
+          "SidebarTags dans Layout (v-app, Header, SidebarTags). Même structure que Nuxt / notes et Layout.stories.",
       },
     },
   },
 };
 
 const Template = (args: any) => ({
-  components: { SidebarTags },
+  components: { Layout },
   setup() {
-    const tags = ref(args.tags || []);
+    const tags = ref([...(args.tags || [])]);
     const onTagClick = (clickedTag: { libelleName: string; isSelected: boolean }) => {
-      // Le composant émet déjà l'état final souhaité, on applique directement
-      const tag = tags.value.find((t: { libelleName: string; isSelected: boolean }) => t.libelleName === clickedTag.libelleName);
-      if (tag) {
-        tag.isSelected = clickedTag.isSelected;
-      }
-      console.log("Tag clicked:", clickedTag);
+      const t = tags.value.find((x) => x.libelleName === clickedTag.libelleName);
+      if (t) t.isSelected = clickedTag.isSelected;
     };
     const onTagCreate = (newTag: { title: string; color: string }) => {
-      // Ajouter le nouveau tag à la liste
-      tags.value.push({
-        libelleName: newTag.title,
-        isSelected: false,
-        color: newTag.color,
-      });
-      console.log("Tag created:", newTag);
+      tags.value.push({ libelleName: newTag.title, isSelected: false, color: newTag.color });
     };
     return { args, tags, onTagClick, onTagCreate };
   },
   template: `
-    <v-app>
-      <v-main>
-        <div style="display: flex; height: 400px;">
-          <SidebarTags 
-            :tags="tags" 
-            :title="args.title"
-            :permanent="args.permanent !== false"
-            @tag-click="onTagClick"
-            @tag-create="onTagCreate"
-          />
-          <div style="flex: 1; padding: 2rem; background: #fafafa;">
-            <h3>Main Content Area</h3>
-            <p>Selected tags:</p>
-            <ul>
-              <li v-for="tag in tags.filter(t => t.isSelected)" :key="tag.libelleName">
-                {{ tag.libelleName }}
-              </li>
-            </ul>
-          </div>
-        </div>
-      </v-main>
-    </v-app>
+    <Layout
+      show-tags-sidebar
+      :tags="tags"
+      :sidebar-title="args.title"
+      :sidebar-permanent="args.permanent !== false"
+      @tag-click="onTagClick"
+      @tag-create="onTagCreate"
+    >
+      <div style="padding: 2rem;">
+        <h3>Main Content Area</h3>
+        <p>Selected tags:</p>
+        <ul>
+          <li v-for="tag in tags.filter(t => t.isSelected)" :key="tag.libelleName">{{ tag.libelleName }}</li>
+        </ul>
+      </div>
+    </Layout>
   `,
 });
 

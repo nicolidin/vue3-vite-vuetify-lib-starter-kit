@@ -21,6 +21,36 @@ import { useTheme } from "./modules/globalAppData/composables/useTheme.ts";
 import { generateRandomUuid } from "./services/utils/randomId.ts";
 import { extractTitleFromMarkdown } from "./services/utils/markdownUtils.ts";
 
+// Types
+export type {
+  NoteType,
+  NoteCreateInput,
+  NoteUpdateInput,
+} from "./types/NoteType";
+export type {
+  TagType,
+  TagCreateInput,
+  TagUpdateInput,
+} from "./types/TagType";
+
+// Schémas Zod
+export {
+  NoteCommonSchema,
+  NoteCreateSchema,
+  NoteUpdateSchema,
+  type NoteCommon,
+  type NoteCreate,
+  type NoteUpdate,
+} from "./schemas/note.schema";
+export {
+  TagCommonSchema,
+  TagCreateSchema,
+  TagUpdateSchema,
+  type TagCommon,
+  type TagCreate,
+  type TagUpdate,
+} from "./schemas/tag.schema";
+
 export {
   useLanguage,
   useTheme,

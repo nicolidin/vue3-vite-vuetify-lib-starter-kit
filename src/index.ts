@@ -18,6 +18,7 @@ import { DEFAULT_VUETIFY_CONFIG } from "./lidinAppKitConfig/vuetifyConfig/defaul
 import { createLidinAppKit } from "./lidinAppKitConfig/createLidinAppKit.ts";
 import { useLanguage } from "./modules/globalAppData/composables/useLanguage.ts";
 import { useTheme } from "./modules/globalAppData/composables/useTheme.ts";
+import { useValidation } from "./composables/useValidation/useValidation.ts";
 import { generateRandomUuid } from "./services/utils/randomId.ts";
 import { extractTitleFromMarkdown } from "./services/utils/markdownUtils.ts";
 
@@ -54,6 +55,7 @@ export {
 export {
   useLanguage,
   useTheme,
+  useValidation,
   createLidinAppKit,
   DEFAULT_VUETIFY_CONFIG,
   Dropdown,

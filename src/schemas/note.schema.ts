@@ -6,7 +6,7 @@ import { z } from 'zod';
 export const NoteCommonSchema = z.object({
   id: z.string().optional(),
   contentMd: z.string().min(1, 'Contenu requis'),
-  tagIds: z.array(z.string()).optional(),
+  tagsId: z.array(z.string()).optional(),
   createdAt: z.string().datetime().optional(),
 });
 
@@ -15,10 +15,20 @@ export const NoteCommonSchema = z.object({
  * - Pas d'id (généré côté serveur)
  * - Pas de createdAt (généré côté serveur)
  * - title optionnel (peut être extrait du contentMd)
+ * - contentMd optionnel si title est présent (au moins un des deux requis)
  */
-export const NoteCreateSchema = NoteCommonSchema.omit({ id: true, createdAt: true }).extend({
-  title: z.string().optional(),
-});
+export const NoteCreateSchema = NoteCommonSchema.omit({ id: true, createdAt: true })
+  .extend({
+    title: z.string().optional(),
+    contentMd: z.string().optional(),
+  })
+  .refine(
+    (data) => data.title || data.contentMd,
+    {
+      message: 'Au moins un titre ou un contenu est requis',
+      path: ['contentMd'],
+    }
+  );
 
 /**
  * Schéma pour la mise à jour d'une note

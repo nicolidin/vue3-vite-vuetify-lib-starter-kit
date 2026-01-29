@@ -5,7 +5,7 @@
 export type NoteType = {
   id: string;
   contentMd: string;
-  tagIds: string[];
+  tagsId: string[];
   createdAt?: string;
 };
 
@@ -15,7 +15,7 @@ export type NoteType = {
 export type NoteCreateInput = {
   title?: string;
   contentMd: string;
-  tagIds?: string[];
+  tagsId?: string[];
 };
 
 /**
@@ -24,5 +24,5 @@ export type NoteCreateInput = {
 export type NoteUpdateInput = {
   id: string;
   contentMd?: string;
-  tagIds?: string[];
+  tagsId?: string[];
 };

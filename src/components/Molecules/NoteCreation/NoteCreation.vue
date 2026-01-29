@@ -1,25 +1,36 @@
 <template>
   <div class="note-creation">
     <input
-      v-model="title"
+      v-model="formData.title"
       type="text"
       placeholder="Titre"
       class="note-creation__title"
+      :class="{ 'note-creation__title--error': errors.title }"
     />
+    <div v-if="errors.title" class="note-creation__error">
+      {{ errors.title[0] }}
+    </div>
+
     <textarea
-      v-model="contentMd"
-      placeholder="Content..."
+      v-model="formData.contentMd"
+      placeholder="Content (Markdown)..."
       class="note-creation__content"
+      :class="{ 'note-creation__content--error': errors.contentMd }"
     />
+    <div v-if="errors.contentMd" class="note-creation__error">
+      {{ errors.contentMd[0] }}
+    </div>
+
     <TagDropdown
-      v-model="selectedTagIds"
+      v-model="formData.tagsId"
       :tags="tags"
       class="note-creation__tags"
     />
+
     <div class="note-creation__actions">
       <button
         @click="emitNote"
-        :disabled="!title && !contentMd"
+        :disabled="!isValid"
         class="note-creation__actions-btn note-creation__actions-btn--primary"
       >
         Créer
@@ -38,13 +49,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import TagDropdown from "../TagDropdown/TagDropdown.vue";
-
-// Type pour les tags
-type TagType = {
-  id: string;
-  title: string;
-  color: string;
-};
+import { useValidation } from "../../../composables/useValidation/useValidation";
+import { NoteCreateSchema } from "../../../schemas/note.schema";
+import type { TagType } from "../../../types/TagType";
 
 const props = defineProps<{
   // Liste des tags disponibles pour sélection
@@ -55,23 +62,33 @@ const emit = defineEmits<{
   (e: "create", val: { title: string; contentMd: string; tagsId: string[] }): void;
 }>();
 
-const title = ref("");
-const contentMd = ref("");
-const selectedTagIds = ref<string[]>([]);
+const formData = ref({
+  title: "",
+  contentMd: "",
+  tagsId: [] as string[],
+});
+
+const { errors, validate, isValid } = useValidation(NoteCreateSchema);
 
 function emitNote() {
-  emit("create", {
-    title: title.value,
-    contentMd: contentMd.value,
-    tagsId: selectedTagIds.value,
-  });
-  resetForm();
+  if (validate(formData.value)) {
+    // S'assurer que les valeurs sont des strings (même vides) pour correspondre au format attendu
+    const payload = {
+      title: formData.value.title || "",
+      contentMd: formData.value.contentMd || "",
+      tagsId: formData.value.tagsId || [],
+    };
+    emit("create", payload);
+    resetForm();
+  }
 }
 
 function resetForm() {
-  title.value = "";
-  contentMd.value = "";
-  selectedTagIds.value = [];
+  formData.value = {
+    title: "",
+    contentMd: "",
+    tagsId: [],
+  };
 }
 </script>
 
@@ -91,6 +108,10 @@ function resetForm() {
     outline: none;
     padding: $spacing-4 0;
     @include typo-heading-06();
+
+    &--error {
+      border-bottom-color: #d32f2f;
+    }
   }
 
   &__content {
@@ -103,6 +124,18 @@ function resetForm() {
     outline: none;
     padding: $spacing-4 0;
     @include typo-body;
+
+    &--error {
+      border-bottom-color: #d32f2f;
+    }
+  }
+
+  &__error {
+    color: #d32f2f;
+    font-size: 0.875rem;
+    margin-top: -$spacing-8;
+    margin-bottom: $spacing-8;
+    @include typo-body-small;
   }
 
   &__tags {
@@ -142,4 +175,3 @@ function resetForm() {
   }
 }
 </style>
-

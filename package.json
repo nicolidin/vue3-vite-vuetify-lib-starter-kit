@@ -1,6 +1,6 @@
 {
   "name": "vue-lib-exo-corrected",
-  "version": "1.0.1-beta.1",
+  "version": "1.0.1-beta.2",
   "type": "module",
   "packageManager": "yarn@4.5.0",
   "description": "A lightweight UI kit for Vue 3",

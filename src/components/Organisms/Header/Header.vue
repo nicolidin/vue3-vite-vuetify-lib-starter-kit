@@ -1,6 +1,5 @@
 <template>
-  <v-app-bar app class="header">
-    <v-spacer></v-spacer>
+  <HeaderLayout>
     <v-btn-toggle
       v-model="colorRef"
       mandatory
@@ -10,18 +9,18 @@
       <v-btn value="dark" size="small"> dark </v-btn>
       <v-btn value="light" size="small"> light </v-btn>
     </v-btn-toggle>
-  </v-app-bar>
+  </HeaderLayout>
 </template>
 
 <script setup lang="ts">
+import HeaderLayout from "../../Molecules/HeaderLayout/HeaderLayout.vue";
 import { useTheme } from "../../../modules/globalAppData/composables/useTheme.ts";
 
 const { colorRef } = useTheme();
 </script>
 
 <style scoped lang="scss">
-.header {
-  // Styles spécifiques au header si nécessaire
+.toggle {
+  // Styles optionnels pour le theme toggle
 }
 </style>
-

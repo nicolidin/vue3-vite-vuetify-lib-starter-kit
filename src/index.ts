@@ -2,6 +2,7 @@ import Dropdown from "./components/Atoms/Dropdown/Dropdown.vue";
 import Tag from "./components/Atoms/Tag/Tag.vue";
 import MarkdownText from "./components/Molecules/MarkdownText/MarkdownText.vue";
 import Layout from "./components/Organisms/Layout/Layout.vue";
+import HeaderLayout from "./components/Molecules/HeaderLayout/HeaderLayout.vue";
 import ListLayout from "./components/Molecules/ListLayout/ListLayout.vue";
 import TodoList from "./components/TodoListEasyExercice/TodoList.vue";
 import TodoListVModel from "./components/TodoListEasyExercice/TodoListVModel.vue";
@@ -63,6 +64,7 @@ export {
   Tag,
   MarkdownText,
   Layout,
+  HeaderLayout,
   ListLayout,
   ListNote,
   ListUsers,

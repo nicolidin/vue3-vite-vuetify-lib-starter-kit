@@ -9,6 +9,7 @@ import ListNote from "./components/Molecules/ListNote/ListNote.vue";
 import ListUsers from "./components/Molecules/ListUsers/ListUsers.vue";
 import NoteCard from "./components/Molecules/NoteCard/NoteCard.vue";
 import NoteCreation from "./components/Molecules/NoteCreation/NoteCreation.vue";
+import NoteEditor from "./components/Molecules/NoteEditor/NoteEditor.vue";
 import SidebarTags from "./components/Molecules/SidebarTags/SidebarTags.vue";
 import TagDropdown from "./components/Molecules/TagDropdown/TagDropdown.vue";
 import UserCard from "./components/Molecules/UserCard/UserCard.vue";
@@ -67,6 +68,7 @@ export {
   ListUsers,
   NoteCard,
   NoteCreation,
+  NoteEditor,
   SidebarTags,
   TagDropdown,
   UserCard,

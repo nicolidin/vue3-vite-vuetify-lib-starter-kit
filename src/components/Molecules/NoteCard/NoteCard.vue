@@ -1,5 +1,5 @@
 <template>
-  <div class="note-card">
+  <div class="note-card" role="button" tabindex="0" @click="emit('note-click', note)" @keydown.enter="emit('note-click', note)">
     <h3>{{ title }}</h3>
     <p>{{ contentWithoutTitle }}</p>
     <div class="note-meta" v-if="normalizedTags.length > 0">
@@ -26,6 +26,10 @@ const props = defineProps<{
     createdAt: string
     tags?: string[] | { title: string; color: string }[]
   }
+}>()
+
+const emit = defineEmits<{
+  (e: 'note-click', note: typeof props.note): void
 }>()
 
 const title = computed(() => {
@@ -64,6 +68,10 @@ const normalizedTags = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  cursor: pointer;
+}
+.note-card:hover {
+  background-color: #f0f0f0;
 }
 
 .note-meta {

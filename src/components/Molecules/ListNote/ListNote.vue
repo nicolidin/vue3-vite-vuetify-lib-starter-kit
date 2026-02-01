@@ -1,9 +1,10 @@
 <template>
   <ListLayout>
     <NoteCard
-        v-for="note in notes"
-        :key="note.id"
-        :note="note"
+      v-for="note in notes"
+      :key="note.id"
+      :note="note"
+      @note-click="emit('note-click', $event)"
     />
   </ListLayout>
 </template>
@@ -19,5 +20,9 @@ const props = defineProps<{
     createdAt: string
     tags?: string[] | { title: string; color: string }[]
   }[]
+}>()
+
+const emit = defineEmits<{
+  (e: 'note-click', note: (typeof props.notes)[number]): void
 }>()
 </script>

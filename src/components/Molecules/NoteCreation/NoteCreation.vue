@@ -68,11 +68,10 @@ const formData = ref({
   tagsId: [] as string[],
 });
 
-const { errors, validate, isValid } = useValidation(NoteCreateSchema);
+const { errors, validate, isValid } = useValidation(NoteCreateSchema, formData);
 
 function emitNote() {
-  if (validate(formData.value)) {
-    // S'assurer que les valeurs sont des strings (même vides) pour correspondre au format attendu
+  if (validate()) {
     const payload = {
       title: formData.value.title || "",
       contentMd: formData.value.contentMd || "",

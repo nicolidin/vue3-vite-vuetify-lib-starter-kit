@@ -1,39 +1,47 @@
-import { ref, computed } from 'vue';
+import { ref, computed, type Ref } from 'vue';
 import { z, type ZodSchema } from 'zod';
 
 /**
- * Composable de validation avec Zod
- * 
+ * Composable de validation avec Zod (mode "computed lazy").
+ * Les erreurs et isValid sont dérivés réactivement des données après le premier submit.
+ *
  * @param schema - Schéma Zod pour valider les données
+ * @param dataRef - Ref (ou ComputedRef) des données à valider
  * @returns Objet avec errors, isTouched, validate, isValid
- * 
+ *
  * @example
  * ```typescript
- * const { errors, validate, isValid } = useValidation(NoteCreateSchema)
- * 
- * if (validate(formData.value)) {
- *   // Données valides
- * }
+ * const formData = ref({ title: '', contentMd: '', tagsId: [] });
+ * const { errors, validate, isValid } = useValidation(NoteCreateSchema, formData);
  * ```
  */
-export function useValidation<T extends ZodSchema>(schema: T) {
-  const errors = ref<Record<string, string[]>>({});
+export function useValidation<T extends ZodSchema>(schema: T, dataRef: Ref<unknown>) {
+  // "Lazy" : on n'affiche les erreurs qu'après une première tentative de submit.
   const isTouched = ref(false);
 
-  function validate(data: unknown): data is z.infer<T> {
+  // Erreurs par champ. Vides tant qu'on n'a pas touché ; ensuite dérivées réactivement du parse Zod.
+  // Dès que l'utilisateur corrige le formulaire, les erreurs se mettent à jour (et le bouton se réactive).
+  const errors = computed<Record<string, string[]>>(() => {
+    if (!isTouched.value) return {};
+    const result = schema.safeParse(dataRef.value);
+    if (result.success) return {};
+    return (result.error.flatten().fieldErrors ?? {}) as Record<string, string[]>;
+  });
+
+  // Valide pour activer le bouton. Avant premier submit = true ; après, = résultat du parse sur les données actuelles.
+  const isValid = computed(() => {
+    if (!isTouched.value) return true;
+    return schema.safeParse(dataRef.value).success;
+  });
+
+  // À appeler au submit. Marque le formulaire comme "touché" et retourne true si les données passent le schéma.
+  // En cas de succès, on repasse isTouched à false pour que le formulaire reset n'affiche plus d'erreurs.
+  function validate(): data is z.infer<T> {
     isTouched.value = true;
-    const result = schema.safeParse(data);
-
-    if (!result.success) {
-      errors.value = result.error.flatten().fieldErrors;
-      return false;
-    }
-
-    errors.value = {};
-    return true;
+    const ok = schema.safeParse(dataRef.value).success;
+    if (ok) isTouched.value = false;
+    return ok;
   }
-
-  const isValid = computed(() => Object.keys(errors.value).length === 0);
 
   return {
     errors,

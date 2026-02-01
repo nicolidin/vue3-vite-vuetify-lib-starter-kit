@@ -50,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, computed, watch } from "vue";
 import TagDropdown from "../TagDropdown/TagDropdown.vue";
 import { useValidation } from "../../../composables/useValidation/useValidation";
 import { NoteUpdateSchema } from "../../../schemas/note.schema";
@@ -104,26 +104,28 @@ watch(
   { immediate: true }
 );
 
-const { errors, validate, isValid } = useValidation(NoteUpdateSchema);
-
-function emitUpdate() {
+const payloadRef = computed(() => {
   const fullContent =
     formData.value.title.trim() !== ""
       ? `# ${formData.value.title.trim()}\n\n${formData.value.contentMd}`
       : formData.value.contentMd;
-
-  const payload = {
+  return {
     id: props.note.id,
     contentMd: fullContent,
     tagsId: formData.value.tagsId ?? [],
   };
+});
 
-  if (validate(payload)) {
+const { errors, validate, isValid } = useValidation(NoteUpdateSchema, payloadRef);
+
+function emitUpdate() {
+  if (validate()) {
+    const payload = payloadRef.value;
     emit("update", {
       id: props.note.id,
       title: formData.value.title || "",
-      contentMd: fullContent,
-      tagsId: formData.value.tagsId ?? [],
+      contentMd: payload.contentMd,
+      tagsId: payload.tagsId ?? [],
     });
   }
 }

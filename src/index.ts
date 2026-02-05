@@ -4,6 +4,7 @@ import MarkdownText from "./components/Molecules/MarkdownText/MarkdownText.vue";
 import Layout from "./components/Organisms/Layout/Layout.vue";
 import HeaderLayout from "./components/Molecules/HeaderLayout/HeaderLayout.vue";
 import ListLayout from "./components/Molecules/ListLayout/ListLayout.vue";
+import ListLayoutDestructured from "./components/Molecules/ListLayoutDestructured/ListLayoutDestructured.vue";
 import TodoList from "./components/TodoListEasyExercice/TodoList.vue";
 import TodoListVModel from "./components/TodoListEasyExercice/TodoListVModel.vue";
 import ListNote from "./components/Molecules/ListNote/ListNote.vue";
@@ -68,6 +69,7 @@ export {
   Layout,
   HeaderLayout,
   ListLayout,
+  ListLayoutDestructured,
   ListNote,
   ListUsers,
   NoteCard,

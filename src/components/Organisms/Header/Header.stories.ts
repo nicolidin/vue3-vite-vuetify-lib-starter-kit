@@ -8,7 +8,7 @@ export default {
     docs: {
       description: {
         component:
-          "Header principal avec toggle de thème (dark/light). Gère le changement de thème de l'application.",
+          "Header principal avec toggle de thème (dark/light). Utilise HeaderLayout (Molecule) pour la structure (v-app-bar + slots). Gère le changement de thème de l'application.",
       },
     },
   },

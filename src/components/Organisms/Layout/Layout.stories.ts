@@ -9,7 +9,7 @@ export default {
     docs: {
       description: {
         component:
-          "Layout principal avec barre d'app, sidebar de tags et slot de contenu. Permet de changer le thème.",
+          "Layout principal avec Header (Organism, qui utilise HeaderLayout), sidebar de tags optionnelle (SidebarTags) et slot de contenu. Permet de changer le thème.",
       },
     },
   },

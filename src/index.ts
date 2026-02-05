@@ -9,6 +9,8 @@ import TodoListVModel from "./components/TodoListEasyExercice/TodoListVModel.vue
 import ListNote from "./components/Molecules/ListNote/ListNote.vue";
 import ListUsers from "./components/Molecules/ListUsers/ListUsers.vue";
 import NoteCard from "./components/Molecules/NoteCard/NoteCard.vue";
+import NewNoteCard from "./components/Molecules/NoteCard/NewNoteCard.vue";
+
 import NoteCreation from "./components/Molecules/NoteCreation/NoteCreation.vue";
 import NoteEditor from "./components/Molecules/NoteEditor/NoteEditor.vue";
 import SidebarTags from "./components/Molecules/SidebarTags/SidebarTags.vue";
@@ -69,6 +71,7 @@ export {
   ListNote,
   ListUsers,
   NoteCard,
+  NewNoteCard,
   NoteCreation,
   NoteEditor,
   SidebarTags,

@@ -30,18 +30,11 @@
 import { computed } from "vue";
 import Dropdown from "../../Atoms/Dropdown/Dropdown.vue";
 import Tag from "../../Atoms/Tag/Tag.vue";
-
-// Type pour les tags
-type TagType = {
-  id: string;
-  title: string;
-  color: string;
-};
+import type { TagOption } from "../../../types/display";
 
 const props = withDefaults(
   defineProps<{
-    // Liste des tags disponibles
-    tags?: TagType[];
+    tags?: TagOption[];
     // Valeur sélectionnée (array d'IDs)
     modelValue?: string[];
     // Label du dropdown

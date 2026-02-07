@@ -12,17 +12,13 @@
 <script setup lang="ts">
 import ListLayout from '../ListLayout/ListLayout.vue'
 import NoteCard from '../NoteCard/NoteCard.vue'
+import type { NoteDisplay } from '../../../types/display'
 
 const props = defineProps<{
-  notes: {
-    id: string | number
-    contentMd: string
-    createdAt: string
-    tags?: string[] | { title: string; color: string }[]
-  }[]
+  notes: NoteDisplay[]
 }>()
 
 const emit = defineEmits<{
-  (e: 'note-click', note: (typeof props.notes)[number]): void
+  (e: 'note-click', note: NoteDisplay): void
 }>()
 </script>

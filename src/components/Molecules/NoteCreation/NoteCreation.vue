@@ -51,12 +51,10 @@ import { ref } from "vue";
 import TagDropdown from "../TagDropdown/TagDropdown.vue";
 import { useValidation } from "../../../composables/useValidation/useValidation";
 import { NoteCreateSchema } from "../../../schemas/note.schema";
-
-/** Type inline pour les tags affichés dans le dropdown (lib ne dépend pas des types domaine de l'app) */
-type TagForDropdown = { id: string; title: string; color: string };
+import type { TagOption } from "../../../types/display";
 
 const props = defineProps<{
-  tags?: TagForDropdown[];
+  tags?: TagOption[];
 }>();
 
 const emit = defineEmits<{

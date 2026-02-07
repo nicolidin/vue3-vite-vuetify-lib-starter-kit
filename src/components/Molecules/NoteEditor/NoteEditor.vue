@@ -55,8 +55,7 @@ import TagDropdown from "../TagDropdown/TagDropdown.vue";
 import { useValidation } from "../../../composables/useValidation/useValidation";
 import { NoteUpdateSchema } from "../../../schemas/note.schema";
 import { extractTitleFromMarkdown } from "../../../services/utils/markdownUtils";
-
-type TagForDropdown = { id: string; title: string; color: string };
+import type { TagOption } from "../../../types/display";
 
 const props = defineProps<{
   /** Note à éditer (id, contentMd, tagIds) */
@@ -65,7 +64,7 @@ const props = defineProps<{
     contentMd: string;
     tagIds?: string[];
   };
-  tags?: TagForDropdown[];
+  tags?: TagOption[];
 }>();
 
 const emit = defineEmits<{

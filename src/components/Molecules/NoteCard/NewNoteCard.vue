@@ -19,18 +19,14 @@
 import { computed } from 'vue'
 import { extractTitleFromMarkdown } from '../../../services/utils/markdownUtils'
 import Tag from '../../Atoms/Tag/Tag.vue'
+import type { NoteDisplay } from '../../../types/display'
 
 const props = defineProps<{
-  note: {
-    id: string | number
-    contentMd: string
-    createdAt: string
-    tags?: string[] | { title: string; color: string }[]
-  }
+  note: NoteDisplay
 }>()
 
 const emit = defineEmits<{
-  (e: 'note-click', note: typeof props.note): void
+  (e: 'note-click', note: NoteDisplay): void
 }>()
 
 const title = computed(() => {

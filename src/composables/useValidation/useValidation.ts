@@ -11,7 +11,7 @@ import { z, type ZodSchema } from 'zod';
  *
  * @example
  * ```typescript
- * const formData = ref({ title: '', contentMd: '', tagsId: [] });
+ * const formData = ref({ title: '', contentMd: '', tagIds: [] });
  * const { errors, validate, isValid } = useValidation(NoteCreateSchema, formData);
  * ```
  */

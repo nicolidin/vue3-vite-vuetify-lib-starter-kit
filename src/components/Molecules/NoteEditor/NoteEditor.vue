@@ -25,7 +25,7 @@
     />
 
     <TagDropdown
-      v-model="formData.tagsId"
+      v-model="formData.tagIds"
       :tags="tags"
       class="note-editor__tags"
     />
@@ -55,28 +55,28 @@ import TagDropdown from "../TagDropdown/TagDropdown.vue";
 import { useValidation } from "../../../composables/useValidation/useValidation";
 import { NoteUpdateSchema } from "../../../schemas/note.schema";
 import { extractTitleFromMarkdown } from "../../../services/utils/markdownUtils";
-import type { TagType } from "../../../types/TagType";
+
+type TagForDropdown = { id: string; title: string; color: string };
 
 const props = defineProps<{
-  /** Note à éditer (id, contentMd, tagsId) */
+  /** Note à éditer (id, contentMd, tagIds) */
   note: {
     id: string;
     contentMd: string;
-    tagsId?: string[];
+    tagIds?: string[];
   };
-  /** Liste des tags disponibles pour sélection */
-  tags?: TagType[];
+  tags?: TagForDropdown[];
 }>();
 
 const emit = defineEmits<{
-  (e: "update", val: { id: string; title: string; contentMd: string; tagsId: string[] }): void;
+  (e: "update", val: { id: string; title: string; contentMd: string; tagIds: string[] }): void;
   (e: "cancel"): void;
 }>();
 
 const formData = ref({
   title: "",
   contentMd: "",
-  tagsId: [] as string[],
+  tagIds: [] as string[],
 });
 
 function getBodyWithoutTitle(contentMd: string): string {
@@ -94,7 +94,7 @@ function resetFormFromNote() {
   formData.value = {
     title,
     contentMd: body,
-    tagsId: note.tagsId ?? [],
+    tagIds: note.tagIds ?? [],
   };
 }
 
@@ -112,7 +112,7 @@ const payloadRef = computed(() => {
   return {
     id: props.note.id,
     contentMd: fullContent,
-    tagsId: formData.value.tagsId ?? [],
+    tagIds: formData.value.tagIds ?? [],
   };
 });
 
@@ -125,7 +125,7 @@ function emitUpdate() {
       id: props.note.id,
       title: formData.value.title || "",
       contentMd: payload.contentMd,
-      tagsId: payload.tagsId ?? [],
+      tagIds: payload.tagIds ?? [],
     });
   }
 }

@@ -22,7 +22,7 @@
     </div>
 
     <TagDropdown
-      v-model="formData.tagsId"
+      v-model="formData.tagIds"
       :tags="tags"
       class="note-creation__tags"
     />
@@ -51,21 +51,22 @@ import { ref } from "vue";
 import TagDropdown from "../TagDropdown/TagDropdown.vue";
 import { useValidation } from "../../../composables/useValidation/useValidation";
 import { NoteCreateSchema } from "../../../schemas/note.schema";
-import type { TagType } from "../../../types/TagType";
+
+/** Type inline pour les tags affichés dans le dropdown (lib ne dépend pas des types domaine de l'app) */
+type TagForDropdown = { id: string; title: string; color: string };
 
 const props = defineProps<{
-  // Liste des tags disponibles pour sélection
-  tags?: TagType[];
+  tags?: TagForDropdown[];
 }>();
 
 const emit = defineEmits<{
-  (e: "create", val: { title: string; contentMd: string; tagsId: string[] }): void;
+  (e: "create", val: { title: string; contentMd: string; tagIds: string[] }): void;
 }>();
 
 const formData = ref({
   title: "",
   contentMd: "",
-  tagsId: [] as string[],
+  tagIds: [] as string[],
 });
 
 const { errors, validate, isValid } = useValidation(NoteCreateSchema, formData);
@@ -75,7 +76,7 @@ function emitNote() {
     const payload = {
       title: formData.value.title || "",
       contentMd: formData.value.contentMd || "",
-      tagsId: formData.value.tagsId || [],
+      tagIds: formData.value.tagIds || [],
     };
     emit("create", payload);
     resetForm();
@@ -86,7 +87,7 @@ function resetForm() {
   formData.value = {
     title: "",
     contentMd: "",
-    tagsId: [],
+    tagIds: [],
   };
 }
 </script>

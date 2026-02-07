@@ -1,32 +1,22 @@
 import { z } from 'zod';
 
 /**
- * Schéma commun pour Tag (base réutilisable)
+ * Schéma standalone pour la création d'un tag (formulaire tag).
  */
-export const TagCommonSchema = z.object({
-  id: z.string().optional(),
+export const TagCreateSchema = z.object({
   title: z.string().min(1, 'Titre requis'),
   color: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Couleur doit être au format hex (#RRGGBB)'),
 });
 
 /**
- * Schéma pour la création d'un tag
- * - Pas d'id (généré côté serveur)
+ * Schéma standalone pour la mise à jour d'un tag.
+ * id requis ; title et color optionnels (partial update).
  */
-export const TagCreateSchema = TagCommonSchema.omit({ id: true });
-
-/**
- * Schéma pour la mise à jour d'un tag
- * - id requis
- * - Tous les autres champs optionnels (partial update)
- */
-export const TagUpdateSchema = TagCommonSchema.partial().extend({
+export const TagUpdateSchema = z.object({
   id: z.string(),
+  title: z.string().min(1, 'Titre requis').optional(),
+  color: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Couleur doit être au format hex (#RRGGBB)').optional(),
 });
 
-/**
- * Inférence de types depuis les schémas
- */
-export type TagCommon = z.infer<typeof TagCommonSchema>;
 export type TagCreate = z.infer<typeof TagCreateSchema>;
 export type TagUpdate = z.infer<typeof TagUpdateSchema>;

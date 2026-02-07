@@ -18,7 +18,7 @@ export default {
 const defaultNote = {
   id: "1",
   contentMd: "# Ma note\n\nContenu en **markdown**.",
-  tagsId: ["1", "2"],
+  tagIds: ["1", "2"],
 };
 
 const defaultTags = [
@@ -64,12 +64,12 @@ Default.args = {
 
 export const SansTags = Template.bind({});
 SansTags.args = {
-  note: { id: "2", contentMd: "# Titre seul\n\n", tagsId: [] },
+  note: { id: "2", contentMd: "# Titre seul\n\n", tagIds: [] },
   tags: [],
 };
 
 export const NoteVide = Template.bind({});
 NoteVide.args = {
-  note: { id: "3", contentMd: "", tagsId: [] },
+  note: { id: "3", contentMd: "", tagIds: [] },
   tags: defaultTags,
 };

@@ -19,7 +19,7 @@ const Template = (args: any) => ({
   components: { NoteCreation },
   setup() {
     const lastNote = ref<any>(null);
-    const onCreate = (note: { title: string; contentMd: string; tagsId: string[] }) => {
+    const onCreate = (note: { title: string; contentMd: string; tagIds: string[] }) => {
       lastNote.value = note;
       console.log("Note créée:", note);
     };

@@ -10,14 +10,14 @@ export default {
     docs: {
       description: {
         component:
-          "SidebarTags dans Layout (v-app, Header, SidebarTags). Même structure que Nuxt / notes et Layout.stories.",
+          "SidebarTags dans Layout : la page injecte SidebarTags via le slot #sidebar du Layout (même structure que Nuxt /notes).",
       },
     },
   },
 };
 
 const Template = (args: any) => ({
-  components: { Layout },
+  components: { Layout, SidebarTags },
   setup() {
     const tags = ref([...(args.tags || [])]);
     const onTagClick = (clickedTag: { libelleName: string; isSelected: boolean }) => {
@@ -30,14 +30,17 @@ const Template = (args: any) => ({
     return { args, tags, onTagClick, onTagCreate };
   },
   template: `
-    <Layout
-      show-tags-sidebar
-      :tags="tags"
-      :sidebar-title="args.title"
-      :sidebar-permanent="args.permanent !== false"
-      @tag-click="onTagClick"
-      @tag-create="onTagCreate"
-    >
+    <Layout>
+      <template #sidebar>
+        <SidebarTags
+          :model-value="true"
+          :tags="tags"
+          :title="args.title"
+          :permanent="args.permanent !== false"
+          @tag-click="onTagClick"
+          @tag-create="onTagCreate"
+        />
+      </template>
       <div style="padding: 2rem;">
         <h3>Main Content Area</h3>
         <p>Selected tags:</p>
@@ -87,4 +90,3 @@ ManyTags.args = {
     { libelleName: "Projects", isSelected: false, color: "#82E0AA" },
   ],
 };
-

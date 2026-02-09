@@ -1,8 +1,11 @@
 <template>
   <v-app>
     <Header />
+    <template v-if="hasSidebarSlot">
+      <slot name="sidebar" />
+    </template>
     <SidebarTags
-      v-if="showTagsSidebar"
+      v-else-if="showTagsSidebar"
       :tags="tags || []"
       :title="sidebarTitle"
       :model-value="sidebarModelValue"
@@ -12,14 +15,7 @@
       @tag-create="handleTagCreate"
       @update:model-value="handleSidebarUpdate"
     />
-    <v-main
-      style="
-        --v-layout-left: 0px;
-        --v-layout-right: 0px;
-        --v-layout-top: 64px;
-        --v-layout-bottom: 44px;
-      "
-    >
+    <v-main :style="mainStyle">
       <v-container class="v-container">
         <div class="containerInner">
           <slot></slot>
@@ -30,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, computed, useSlots } from "vue";
 import Header from "../Header/Header.vue";
 import SidebarTags from "../../Molecules/SidebarTags/SidebarTags.vue";
 
@@ -61,6 +57,18 @@ const props = withDefaults(
     sidebarTemporary: false,
   }
 );
+
+const slots = useSlots();
+const hasSidebarSlot = computed(() => !!slots.sidebar);
+const hasSidebar = computed(
+  () => hasSidebarSlot.value || props.showTagsSidebar
+);
+const mainStyle = computed(() => ({
+  "--v-layout-left": hasSidebar.value ? "256px" : "0px",
+  "--v-layout-right": "0px",
+  "--v-layout-top": "64px",
+  "--v-layout-bottom": "44px",
+}));
 
 const emit = defineEmits<{
   (e: "tag-click", tag: { libelleName: string; isSelected: boolean }): void;
